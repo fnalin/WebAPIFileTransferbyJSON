@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		_leiame.txt = _leiame.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoWebAPIServerClient.ClientConsole", "DemoWebAPIServerClient.ClientConsole\DemoWebAPIServerClient.ClientConsole.csproj", "{61B316C5-B010-475B-9645-459E4892E87A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{4CABF9C3-A28F-45F1-B7D9-F881ACE4EC23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CABF9C3-A28F-45F1-B7D9-F881ACE4EC23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CABF9C3-A28F-45F1-B7D9-F881ACE4EC23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61B316C5-B010-475B-9645-459E4892E87A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61B316C5-B010-475B-9645-459E4892E87A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61B316C5-B010-475B-9645-459E4892E87A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61B316C5-B010-475B-9645-459E4892E87A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
