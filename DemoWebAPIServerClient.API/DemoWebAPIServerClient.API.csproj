@@ -112,12 +112,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Uploads\arquivo_xsd.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="Uploads\ArtigoArquivosEDI.zip" />
-    <Content Include="Uploads\NFE - Fabiano Nalin.pdf" />
-    <Content Include="Uploads\Relatório de Horas.xls" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -126,19 +120,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Uploads\09_03_2016_08_18_08.jpg" />
-    <Content Include="Uploads\0cfe83ef31464661a365d7ee7be2c5dc.dll" />
-    <Content Include="Uploads\442af03a5fc3493b84b811134e4d58e9.dll" />
-    <Content Include="Uploads\7b803b29c0c24ab78a4df8e14beac33a.dll" />
-    <Content Include="Uploads\82c4ecdc44ad4165af2b5faa70bfb217.dll" />
-    <Content Include="Uploads\9ab6d59482f847d3ab3f1db16ca7fd7c.dll" />
-    <Content Include="Uploads\ae3b7abc0afd4bd38aeffc4b0063caeb.dll" />
-    <Content Include="Uploads\agco.png" />
-    <Content Include="Uploads\api.txt" />
-    <Content Include="Uploads\c625e9923b254c18af139fdd672cfafe.dll" />
-    <Content Include="Uploads\d998165794ad4f74b82401697325bf41.dll" />
-    <Content Include="Uploads\NFE - Ka.txt" />
-    <Content Include="Uploads\xamarin.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -58,16 +58,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Files\0cfe83ef31464661a365d7ee7be2c5dc.dll" />
-    <Content Include="Files\442af03a5fc3493b84b811134e4d58e9.dll" />
-    <Content Include="Files\7b803b29c0c24ab78a4df8e14beac33a.dll" />
-    <Content Include="Files\82c4ecdc44ad4165af2b5faa70bfb217.dll" />
-    <Content Include="Files\9ab6d59482f847d3ab3f1db16ca7fd7c.dll" />
-    <Content Include="Files\ae3b7abc0afd4bd38aeffc4b0063caeb.dll" />
-    <Content Include="Files\c625e9923b254c18af139fdd672cfafe.dll" />
-    <Content Include="Files\d998165794ad4f74b82401697325bf41.dll" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
