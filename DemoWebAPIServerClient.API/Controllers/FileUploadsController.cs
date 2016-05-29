@@ -8,17 +8,9 @@ using System.Web.Http;
 
 namespace DemoWebAPIServerClient.API.Controllers
 {
+    [Authorize]
     public class FileUploadsController : ApiController
     {
-
-        public Task<HttpResponseMessage> Get()
-        {
-            var response =
-                Request.CreateResponse(HttpStatusCode.OK, new { });
-
-            return Task.FromResult<HttpResponseMessage>(response);
-        }
-
         public Task<HttpResponseMessage> Post([FromBody]dynamic body)
         {
             var id = (int)body.id;

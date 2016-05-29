@@ -17,48 +17,55 @@ namespace DemoWebAPIServerClient.ClientConsole
             }
         }
 
+        public static string Token { get; set; }
+
 
         static void Main()
         {
-            var continuar = true;
-            while (continuar)
+            Token = GetToken();
+
+            if (!string.IsNullOrEmpty(Token))
             {
-                BuscarArquivos();
-                Console.WriteLine("\n\n*********************---*****************\n");
-                Console.WriteLine("\nDeseja refazer os uploads na pasta {0}?\n('s'==>SIM | 'n' ==> NÂO)", FolderPath);
-                continuar = Console.ReadLine() == "s" ? true : false;
+                var continuar = true;
+                while (continuar)
+                {
+                    BuscarArquivos();
+                    Console.WriteLine("\n\n*********************---*****************\n");
+                    Console.WriteLine("\nDeseja refazer os uploads na pasta {0}?\n('s'==>SIM | 'n' ==> NÂO)", FolderPath);
+                    continuar = Console.ReadLine() == "s" ? true : false;
+                }
             }
+            else
+                Console.WriteLine("\n\nNão é possível enviar os arquivos. Sessão não autorizada");
 
         }
 
-        private static void BuscarArquivos()
+        private static string GetToken()
         {
-            Console.WriteLine("Buscando arquivos...\n");
-            var filePaths = Directory.GetFiles(FolderPath, "*.*", SearchOption.TopDirectoryOnly);
 
+            Console.WriteLine("Buscando Token p/ autenticação...");
+            var securityUri = new Uri("http://localhost:41031/api/security/token");
+            var body = "userName=email@test.com&password=123@qwe&grant_type=password";
+            var token = string.Empty;
 
-            Console.WriteLine("Preparando arquivos...\n");
-
-
-            filePaths.ToList().ForEach(file =>
+            using (var client = new HttpClient())
             {
-                //CompararTamanhos(file);
-                var nomeArq = Path.GetFileName(file);
-                Console.WriteLine("\n\nEnviando arquivo {0}...", nomeArq);
-                Post(File.ReadAllBytes(file), nomeArq);
-            });
-        }
+                var response =
+                    client.PostAsync("http://localhost:41031/api/security/token",
+                        new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded"))
+                    .Result;
 
-        private static void CompararTamanhos(string path)
-        {
-            var _file = new FileInfo(path);
-            var originalSizeInBytes = _file.Length;
-            Console.WriteLine("Tamanho Original em kb: " + originalSizeInBytes / 1024);
+                if (response.IsSuccessStatusCode)
+                {
+                    dynamic content = JsonConvert.DeserializeObject(
+                        response.Content.ReadAsStringAsync()
+                        .Result);
 
-            var bytes = File.ReadAllBytes(path);
-            var file = Convert.ToBase64String(bytes);
-
-            Console.WriteLine("Tamanho Base64 em kb: " + file.Length / 1024);
+                    Console.WriteLine("Token obtido!");
+                    token = (string)content.access_token;
+                }
+            }
+            return token;
         }
 
         private static void Post(byte[] arquivo, string fileName)
@@ -72,6 +79,8 @@ namespace DemoWebAPIServerClient.ClientConsole
                    nome = "Fabiano Nalin",
                    file = new { nome = fileName, base64 = Convert.ToBase64String(arquivo) }
                });
+
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Token);
 
                 var response =
                     client.PostAsync("http://localhost:41031/api/FileUploads",
@@ -89,8 +98,42 @@ namespace DemoWebAPIServerClient.ClientConsole
                     Console.WriteLine("ID: {0} - Nome: {1}\nNome do arquivo:{2} - Tamanho do arquivo convertido no Server em kb: {3}",
                         (string)content.id, (string)content.nome, (string)content.file.nome, (int)content.file.len);
                 }
+                else
+                    Console.WriteLine("Erro ao tentar enviar arquivo. StatusCode: " + response.StatusCode.ToString());
             }
         }
+
+        private static void BuscarArquivos()
+        {
+            Console.WriteLine("Buscando arquivos...\n");
+            var filePaths = Directory.GetFiles(FolderPath, "*.*", SearchOption.TopDirectoryOnly);
+
+
+            Console.WriteLine("Preparando arquivos...\n");
+
+
+            filePaths.ToList().ForEach(file =>
+            {
+                //CompararTamanhos(file);
+                var nomeArq = Path.GetFileName(file);
+                Console.WriteLine("\nEnviando arquivo {0}...", nomeArq);
+                Post(File.ReadAllBytes(file), nomeArq);
+            });
+        }
+
+        private static void CompararTamanhos(string path)
+        {
+            var _file = new FileInfo(path);
+            var originalSizeInBytes = _file.Length;
+            Console.WriteLine("Tamanho Original em kb: " + originalSizeInBytes / 1024);
+
+            var bytes = File.ReadAllBytes(path);
+            var file = Convert.ToBase64String(bytes);
+
+            Console.WriteLine("Tamanho Base64 em kb: " + file.Length / 1024);
+        }
+
+        
     }
 
 }
