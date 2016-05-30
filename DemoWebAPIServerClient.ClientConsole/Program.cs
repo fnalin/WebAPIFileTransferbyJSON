@@ -44,7 +44,7 @@ namespace DemoWebAPIServerClient.ClientConsole
         {
 
             Console.WriteLine("Buscando Token p/ autenticação...");
-            var securityUri = new Uri("http://localhost:41031/api/security/token");
+            
             var body = "userName=email@test.com&password=123@qwe&grant_type=password";
             var token = string.Empty;
 
@@ -83,7 +83,7 @@ namespace DemoWebAPIServerClient.ClientConsole
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Token);
 
                 var response =
-                    client.PostAsync("http://localhost:41031/api/FileUploads",
+                    client.PostAsync("http://localhost:41031/api/fileuploads",
                         new StringContent(dados, Encoding.UTF8, "application/json"))
                     .Result;
 
